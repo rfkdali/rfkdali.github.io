@@ -1,0 +1,116 @@
+@font-face {
+    font-family: Arista;
+    src: url(fonts/Arista.ttf);
+}
+body{
+	font-family: verdana;
+	margin: 0;
+	padding: 0;
+	background-color: #002028;
+	color: #333;
+}
+
+header{
+	margin: 0 auto;
+	margin-bottom: 1%;
+}
+
+header h1{
+	margin-bottom: 0.2em;
+}
+
+#container{
+	margin: 0 auto;
+	min-width: 320px;
+	max-width: 800px;
+	background-color: #D5D5D5;
+	padding: 10px;
+}
+
+#demo {
+    width: 100%;
+}
+
+#demo > svg {
+    width: 70%;
+    margin: 0 auto;
+    display: block;
+}
+
+pre{
+	width: 100%;
+}
+
+.javascript{
+	font-size: 1.3em;
+}
+.triangle{
+	padding-top: 5%;
+}
+.triangle svg{
+	height: 300px;
+	width: 300px;
+}
+.triangle path{
+	fill: orange;
+	stroke: #333;
+	stroke-width: 12px;
+}
+
+h1{text-align: center; font-size: 3.5em; color: #CC501F; font-family: Arista;}
+h2{margin-top: 3%;}
+h3{margin-top: 3%;}
+
+.white {
+	background-color: white;
+	border-radius: 10px;
+	padding: 10px;
+}
+footer {
+	margin: 0 auto;
+	width: 800px;
+	background-color: #CC501F;
+	padding: 10px;
+}
+
+footer h3{
+	margin: 0;
+	text-align: center;
+}
+footer p{
+	text-align: center;
+	margin-top: 0.4em;
+}
+footer a{
+	text-decoration: none;
+	color: #fff;
+}
+
+.lien{
+	text-decoration: none;
+    color: #FFF;
+    text-align: center;
+    display: block;
+}
+.lien2{
+	text-decoration: none;
+	color: #CC501F;
+}
+}
+
+.button {
+	display : inline-block;
+	text-transform : uppercase;
+	border-radius: 10px;
+}
+.blue {
+	background : #002028;
+	padding : 10px;
+	color : #fff;
+}
+.orange{
+	background: #CC501F;
+	padding : 10px;
+	color : #fff;
+}
+img{max-width: 100%;}

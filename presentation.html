@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1.0, initial-scale=1.0, user-scalable=0" />
+
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="css/solarized_dark.css">
+	</head>
+	<body>
+  <header><h1>Progressbar.js</h1>
+  <a class="lien" href="https://github.com/kimmobrunfeldt/progressbar.js">https://github.com/kimmobrunfeldt/progressbar.js</a>
+</header>
+  <div id="container">
+  	<h2> Comment ça marche ?</h2>
+    <p>Progressbar.js est une librairie qui permet de réaliser des animations avec le format svg</p>
+    
+  	<h3> SVG : Scalable Vector Graphics</h3>
+    <div class="white">
+  	<p>SVG est un format d'images vectorielles basé sur le langage de balisage XML. <br />Il répond parfaitement à des besoins graphiques légers, qu'ils soient statiques, dynamiques ou interactifs.
+  	</p>
+  	<p> 
+  	Le SVG peut en effet être couplé à un langage de script capable de manipuler son DOM (Document Object Model)</p>
+
+  		<p> Progress bar utilise les SVG paths.</p> 
+  		Exemple:<br />
+      Svg paths: cette balise svg permet de “dessiner” un triangle</div>
+  		<p class="triangle">
+  			<svg>
+  	    		<path d="M150 0 L75 200 L225 200 Z" />
+  			</svg> 
+      </p>
+
+  	<h3> Shifty ?</h3>
+    <a class="lien2" href="https://jeremyckahn.github.io/shifty/">https://jeremyckahn.github.io/shifty/</a>
+    <p class="white">ProgressBar.js utilises shifty pour l'animation des svg <br /><br />
+    <h3>Shifty est une API</h3>
+    <p>à ne pas confondre avec une web API ou web services</p>
+    <br />
+    <div class="white">  
+    <h4>API</h4>
+    <p>
+    An application programming interface (API) is a set of routines, data structures, object classes and/or protocols provided by libraries and/or operating system services in order to support the building of applications.
+    </p>
+    <h4>Webservice</h4>
+    <p>
+      A Web service (also Web Service) is defined by the W3C as "a software system designed to support interoperable machine-to-machine interaction over a network"
+    </p>
+  </div>
+
+</p>
+  		<h3>Qu'est-ce que Tweening ?</h3>
+  		<img src="images/interpolation.png" width="190"/>
+  		<p class="white">Le terme tweening (ou interpolation) désigne un procédé dans d’animation qui permet de générer des images intermédiaires successives de telle sorte qu'une image s'enchaîne </p>
+
+  		<h3>Il y a différents types d'interpolations:</h3>
+  		<img src="images/easin.png"/>
+      <p class="white">Les fonctions Easing sont des fonctions d'animations , il en existe plusieurs et permettent donc d'obtenir plus plusieurs effets (transitions, apparition, disparition, zoom etc...)
+Ses fonctions influent donc sur les propriétés css de l'élément qu'on souhaite animer par exemple, ses dimensions, son opacité, sa couleur etc...</p>
+
+    <br />
+  	<h2>Lecture de code</h2>
+
+    Illustration de ce que tweenable permet de faire:
+     <p><i>exemple d'animation sur du code hexadecimal pour la couleur...</i></p>
+
+    <pre><code class="javascript">var tweenable = new Tweenable();
+    tweenable.tween({
+      from: { color: '#0f0'},
+      to: { color: '#f0f'},
+      step: function (state) {
+        console.log(state.color);
+      }
+    });
+    </code></pre>
+    <i>Ici, on crée une nouvelle instance, on utilise l'instruction new objet, et on assigne le résultat de cette expression à une variable qu'on utilisera par la suite.</i>
+    <p>On crée une nouvelle instance de Tweenable (un objet de la classe Tweenable).</p>
+
+    <p>Tween va permettre, entre autre, d’animer non seulement des nombres (integer)  mais aussi du texte (string) et donc permettre d’animer du CSS (cf .token)
+    </p>
+
+    <p class="nbrligne"><i>l.22</i></p>
+
+  	<pre><code class="javascript">var Tweenable = (function () {
+  	'use strict';
+  	// Aliases that get defined later in this function
+  	var formula;
+  	// CONSTANTS
+  	var DEFAULT_SCHEDULE_FUNCTION;
+  	var DEFAULT_EASING = 'linear';
+  	var DEFAULT_DURATION = 500;
+  	var UPDATE_TIME = 1000 / 60;
+  	var _now = Date.now
+  	</code></pre>
+
+    <p>
+    On déclare plusieurs constantes dont certaines valeurs par défaut comme DEFAULT_EASING et DEFAULT_DURATION ce qui nous évitera de les “re-déclarer” par la suite (meilleur lisibilité code)
+  </p>
+
+    <p class="nbrligne"><i>l.46</i></p>
+  	<pre><code class="javascript">
+  	if (typeof window !== 'undefined') {
+  	// requestAnimationFrame() shim by Paul Irish (modified for Shifty)
+  	// http://paulirish.com/2011/requestanimationframe-for-smart-animating/
+  	DEFAULT_SCHEDULE_FUNCTION = window.requestAnimationFrame
+  	|| window.webkitRequestAnimationFrame
+  	|| window.oRequestAnimationFrame
+  	|| window.msRequestAnimationFrame
+  	|| (window.mozCancelRequestAnimationFrame
+  	&& window.mozRequestAnimationFrame)
+  	|| setTimeout;
+  	} else {
+  	DEFAULT_SCHEDULE_FUNCTION = setTimeout;
+  	}
+  	</code></pre>
+
+  	<p><b>window.requestAnimationFrame()</b> notifie le navigateur que vous souhaitez executer une animation et demande que celui-ci execute une fonction spécifique de mise à jour de l'animation, avant le prochain repaint du navigateur. Cette méthode prend comme argument un callback qui sera appelé avant le repaint du navigateur. </p>
+  	<p><b>Fonction SetTimeOut</b> : Calls a function or executes a code snippet after a specified delay. </p>
+
+    <p class="nbrligne"><i>l.1319</i></p>
+  	<pre><code class="javascript">
+  	function expandEasingObject (easingObject, tokenData) {
+  	Tweenable.each(tokenData, function (prop) {
+  	var currentProp = tokenData[prop];
+  	var chunkNames = currentProp.chunkNames;
+  	var chunkLength = chunkNames.length;
+  	var easingChunks = easingObject[prop].split(' ');
+  	var lastEasingChunk = easingChunks[easingChunks.length - 1];
+  	for (var i = 0; i < chunkLength; i++) {
+  	easingObject[chunkNames[i]] = easingChunks[i] || lastEasingChunk;
+  	}
+  	delete easingObject[prop];
+  	});
+  	}
+  	</code></pre>
+
+    <p class="white">
+      La fonction expandEasingObject utilise deux arguments (easingObject, tokenData)<br />
+EasingObject est l'objet qui va être animé et tokendata va permettre "d'animer ses propriétés css"<br />
+On affecte à la variable currentProp, un tableau contenant les propriétés css (objet[propriété : valeur])<br />
+(exemple : #madiv[background-color: rgb(255,0,255)])...<br />
+Ensuite on stocke dans une variable ChunkLength la taille du tableau chunkNames (exemple: la valeur 3)
+<br />
+On affecte à easingChunks, les valeurs du tableau easingObject[prop] puisqu'on a utilisé .split(" ") pour séparer les différentes valeurs du tableau
+<br />
+on affecte à lastEasingChunk un tableau qui contient ...
+<br />
+<br />
+Explication:
+<br />
+> var propcss = ["color","#ff3"]
+<br />
+> var easingChunks = propcss[1].split(" ");
+<br />
+var lastEasingChunks = easingChunks[easingChunks.length -1];
+<br />
+> "#ff3"
+
+<br />Car easingChunks.length -1 = 0 puisque easingChunks.length = 1
+
+<br />
+Et enfin, on crée une boucle qui nous permettera d'incrémenter le tableau easingObject tant que i < chunkLength
+et qui nous permettera donc de faire évoluer les propriétés CSS de l'objet, en l'occurence ici la couleur.
+    </p>
+
+     <p class="nbrligne"><i>l.1402</i></p>
+  	<pre><code class="javascript">
+  		var element;
+  	if (isString(container)) {
+  	element = document.querySelector(container);
+  	} else {
+  	element = container;
+  	}
+  	</code></pre>
+  	<p> querySelector() : retourne le premier élément trouvé satisfaisant au sélecteur (type de retour : Element), ou null si aucun objet correspondant n'est trouvé.</p>
+
+  	<pre><code class="javascript">
+  	element.appendChild(svgView.svg);
+  	</code></pre>
+  	<p>Ajoute un nœud à la fin de la liste des enfants d'un nœud parent spécifié</p>
+
+
+  	<h3> Demo</h3>
+
+  	<div id="demo"></div>
+    <button onclick="circle.animate(3);" class="button blue">Apparition!</button>
+    <button onclick="circle.animate(0);" class="button orange">Disparition!</button>
+    
+    
+  </div>
+  <footer>
+    <h3>Pour en savoir plus:</h3>
+    <p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers.setTimeout">Explication du WindowTimers.setTimeout</a>
+    </p>
+    <p><a href="https://developer.mozilla.org/fr/docs/Web/API/window.requestAnimationFrame">Explication du window.requestAnimationFrame</a>
+    </p>
+    <p><a href="https://jqueryui.com/resources/demos/effect/easing.html">Démos animations easIn</a>
+    </p>
+    </footer>
+  </footer>
+	<!--JS-->
+	<script type="text/javascript" src="https://rawgit.com/kimmobrunfeldt/progressbar.js/master/dist/progressbar.js"></script>
+	<script type="text/javascript" src="js/demo.js"></script>
+	<script type="text/javascript" src="js/highlight.js"></script>
+	<script>hljs.initHighlightingOnLoad();</script>
+
+	</body>
+</html>
