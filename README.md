@@ -1,4 +1,2 @@
-Présentation de ProgressBar.js
+-----loading-----
 =================
-
-Mini-site réalisé en html/css/js pour présenter ProgressBar.js
